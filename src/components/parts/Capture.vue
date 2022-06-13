@@ -10,9 +10,9 @@ const captureImage = () => {
 }
 </script>
 <template>
-    <v-btn id="save-btn" @click="captureImage">
+    <button id="save-btn" @click="captureImage">
         画像を保存
-    </v-btn>
+    </button>
     <div id="capture">
         <h1>きゃぷちゃ</h1>
     </div>
