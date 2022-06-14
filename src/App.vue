@@ -1,6 +1,7 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import AreaFooter from './components/AreaFooter.vue';
 import AreaHeader from './components/AreaHeader.vue';
 import AreaMain from './components/AreaMain.vue';
 </script>
@@ -8,7 +9,7 @@ import AreaMain from './components/AreaMain.vue';
 <template>
   <AreaHeader />
   <AreaMain />
-  <AreaHeader />
+  <AreaFooter />
 </template>
 
 <style>
