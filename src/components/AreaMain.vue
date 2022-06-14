@@ -1,11 +1,10 @@
 <script setup>
-import { ref } from 'vue';
-
-const count = ref(0)
+import ImageSvg from './parts/ImageSvg.vue';
 </script>
 
 <template>
     <h1>メイン</h1>
+    <ImageSvg />
 </template>
 
 <style scoped>
