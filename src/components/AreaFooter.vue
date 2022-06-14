@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue';
+import Footer_tailwind from './parts/Footer/Footer_tailwind.vue';
 
 const count = ref(0)
 </script>
 
 <template>
-    <h1>フッター</h1>
+    <Footer_tailwind />
 </template>
 
 <style scoped>
