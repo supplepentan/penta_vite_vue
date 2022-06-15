@@ -1,39 +1,18 @@
 <template>
     <div>
         <h1>Canvas</h1>
-        <canvas width="200" height="200" class="canvas"></canvas>
+        <canvas width="200" height="200" class="border" id="mycanvas"></canvas>
     </div>
 </template>
 
-<script>
-export default {
-    props: {
-        radius: {
-            type: Number,
-            default: 50
-        }
-    },
-    watch: {
-        radius() {
-            this.draw(this.radius)
-        }
-    },
-    methods: {
-        draw(radius) {
-            this.ctx.beginPath()
-            this.ctx.clearRect(0, 0, 200, 200)
-            this.ctx.arc(100, 100, radius, 0, Math.PI * 2)
-            this.ctx.fill()
-        }
-    },
-    mounted() {
-        // mounted 以降で canvas の DOM にアクセスできる
-        // CreateJS などを使うときにも、ここで canvas と紐付ける
-        // console.log(this.$el)
-        this.ctx = this.$el.getContext('2d')
-        this.draw(this.radius)
-    }
-}
+<script setup>
+import { onMounted } from 'vue';
+onMounted(() => {
+    const canvas = document.querySelector('#mycanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'green';
+    ctx.fillRect(10, 10, 100, 100);
+})
 </script>
 
 <style scoped>
