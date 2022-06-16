@@ -25,7 +25,7 @@ onMounted(() => {
     drawImage2();
 
 })
-async function concatCanvas(image1, image2) {
+const concatCanvas = async (image1, image2) => {
     const canvas = document.querySelector(image1);
     const ctx = canvas.getContext("2d");
     for (let i = 0; i < image2.length; i++) {
