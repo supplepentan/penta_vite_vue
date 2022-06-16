@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 onMounted(() => {
-    function drawImage1() {
+    const drawImage1 = () => {
         const img1 = new Image();
         img1.src = "/src/assets/img/animal.png";
         img1.onload = () => {
@@ -10,7 +10,7 @@ onMounted(() => {
             ctx.drawImage(img1, 0, 0, canvas.width, canvas.height);
         }
     }
-    function drawImage2() {
+    const drawImage2 = () => {
         const img2 = new Image();
         img2.src = "/src/assets/img/supplepentan_t.png";
         img2.onload = () => {
@@ -33,12 +33,12 @@ async function concatCanvas(image1, image2) {
         ctx.drawImage(imageMix, 0, 0, canvas.width, canvas.height);
     }
 };
-function eraseCanvas(target) {
+const eraseCanvas = (target) => {
     const canvas = document.querySelector(target);
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
-function getImagefromCanvas(id) {
+const getImagefromCanvas = (id) => {
     return new Promise((resolve, reject) => {
         const image = new Image();
         const ctx = document.querySelector(id).getContext("2d");
@@ -67,12 +67,12 @@ const getImage = () => {
 <template>
     <div>
         <h1>Canvas</h1>
-        <div class="flex flex-wrap content-center h-48 bg-gray-200">
+        <div class="flex flex-wrap content-around h-48 bg-gray-200">
             <!-- 合成するcanvasその1 -->
-            <div class="w-1/5 p-2">
+            <div class="place-items-auto">
                 <canvas id="image1" class="border" width="200" height="170"></canvas>
             </div>
-            <div class="w-1/5 p-2">
+            <div class="place-items-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
                     viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -80,10 +80,10 @@ const getImage = () => {
                 </svg>
             </div>
             <!-- 合成するcanvasその2 -->
-            <div class="w-1/5 p-2">
+            <div class="place-items-auto">
                 <canvas id="image2" class="border" width="200" height="170"></canvas>
             </div>
-            <div class="w-1/5 p-2">
+            <div class="place-items-auto">
                 <p><button type="button" id="btn-concat" @click="imgComp">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-caret-right" viewBox="0 0 16 16">
@@ -93,7 +93,7 @@ const getImage = () => {
                     </button></p>
             </div>
             <!-- 合成結果用のcanvas -->
-            <div class="w-1/5 p-2">
+            <div class="place-items-auto">
                 <canvas id="concat" class="border" width="200" height="170"></canvas><!-- 消しゴム -->
             </div>
             <div class="w-1/2 p-2">
