@@ -3,7 +3,7 @@ import CanvasWebCamera from './parts/CanvasWebCamera.vue';
 </script>
 
 <template>
-    <div>
+    <div class="container p-2">
         <CanvasWebCamera />
     </div>
 </template>
