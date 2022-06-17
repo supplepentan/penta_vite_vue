@@ -1,12 +1,10 @@
 <script setup>
-import CanvasImageComposition from './parts/CanvasImageComposition.vue';
-import WebCamera from './parts/WebCamera.vue';
+import CanvasWebCamera from './parts/CanvasWebCamera.vue';
 </script>
 
 <template>
     <div>
-        <CanvasImageComposition />
-        <WebCamera />
+        <CanvasWebCamera />
     </div>
 </template>
 
