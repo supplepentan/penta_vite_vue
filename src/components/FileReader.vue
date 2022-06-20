@@ -43,8 +43,8 @@ const fileSelected = () => {
     <div class="container">
         <input type="file" id="input_02_file" v-on:change="fileSelected" style="width:100%; margin:0px 0px 10px 0px;" />
         結果:<br>
-        <textarea id="edit_02_result" style="width:100%; height:200px; margin:0px 0px 5px 0px;"
-            disabled>{{ analy }}</textarea>
+        <textarea id="edit_02_result" v-model="analy" style="width:100%; height:200px; margin:0px 0px 5px 0px;"
+            disabled></textarea>
         <p>{{ file_list }}</p>
         <p>{{ file }}</p>
     </div>
