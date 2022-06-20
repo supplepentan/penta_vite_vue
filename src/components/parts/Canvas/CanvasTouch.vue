@@ -1,29 +1,28 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+const canvas = ref();
+const ctx = ref();
 onMounted(() => {
-    const canvas = document.querySelector('#canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.addEventListener('mousemove', mouseMove);
+    canvas.value = document.querySelector('#canvas');
+    ctx.value = canvas.value.getContext('2d');
+    canvas.value.addEventListener('mousemove', mouseMove);
     function mouseMove(event) {
-        ctx.beginPath();
-        ctx.arc(event.offsetX, event.offsetY, 10, 0, 2 * Math.PI);
-        ctx.stroke();
+        ctx.value.beginPath();
+        ctx.value.arc(event.offsetX, event.offsetY, 10, 0, 2 * Math.PI);
+        ctx.value.stroke();
     }
 });
 function cls() {
     //キャンバスの(0,0)～(200,200)の範囲をクリアする
     console.log("イレイザー");
-    const canvas = document.querySelector('#canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.value.clearRect(0, 0, canvas.value.width, canvas.value.height);
 };
 const getImage = () => {
-    const canvas = document.querySelector("#canvas");
+    console.log("ゲットイメージ");
     const link = document.createElement('a');
-    link.href = canvas.toDataURL();
+    link.href = canvas.value.toDataURL();
     link.download = 'export_image.png';
     link.click();
-
 }
 </script>
 <template>
