@@ -1,10 +1,12 @@
 <script setup>
-import CanvasTouch from "./parts/Canvas/CanvasTouch.vue";
+import ImageCapture from "./parts/ImageCapture.vue";
+import OpencvBase from "./parts/Opencv/OpencvBase.vue";
 </script>
 
 <template>
     <div class="container p-2">
-        <CanvasTouch />
+        <ImageCapture />
+        <OpencvBase />
     </div>
 </template>
 
