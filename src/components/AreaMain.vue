@@ -1,9 +1,9 @@
 <script setup>
-import Clipboard from './parts/Clipboard.vue';
+import FabricBase from "./parts/FabricJs/FabricBase.vue"
 </script>
 <template>
   <div>
-    <Clipboard />
+    <FabricBase />
   </div>
 </template>
 <style scoped>

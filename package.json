@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "fabric": "^5.2.1",
     "html2canvas": "^1.4.1",
     "three": "^0.141.0",
     "vue": "^3.2.25"
