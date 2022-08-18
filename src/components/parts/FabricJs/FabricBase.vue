@@ -41,7 +41,15 @@ const loadFile = async (e) => {
     });
   };
   img.src = URL.createObjectURL(e.target.files[0]);
-}     
+};
+//canvasイメージをダウンロード
+const getImage = () => {
+  const canvas = document.querySelector("#myCanvas");
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL();
+  link.download = 'export_image.png';
+  link.click();
+}
 </script>
 <template>
   <div class="m-2">
@@ -49,9 +57,14 @@ const loadFile = async (e) => {
     <div class="flex justify-center w-full m-2">
       <canvas id="myCanvas" width=500 height=500 class="block border-2 bg-gray400"></canvas>
     </div>
-    <div class="">
-      <label for="loadFile" class="block">Uploading Image</label>
-      <input type="file" id="loadFile" v-on:change="loadFile" required minlength="4" maxlength="8" size="10">
+    <div>
+      <div class="flex justify-center">
+        <label for="loadFile" class="">Uploading Image</label>
+        <input type="file" id="loadFile" v-on:change="loadFile" required minlength="4" maxlength="8" size="10">
+      </div>
+      <div class="flex justify-center">
+        <button type="button" v-on:click="getImage" class="p-2 border-2">ダウンロード</button>
+      </div>
     </div>
   </div>
 </template>

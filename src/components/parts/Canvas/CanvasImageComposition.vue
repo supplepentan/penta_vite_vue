@@ -61,7 +61,6 @@ const getImage = () => {
     link.href = canvas.toDataURL();
     link.download = 'export_image.png';
     link.click();
-
 }
 </script>
 <template>
