@@ -5,7 +5,7 @@
 import { fabric } from "fabric";
 import { onMounted } from "vue";
 
-
+var canvas;
 // create a rectangle object
 const rect = new fabric.Rect({
   left: 200,
@@ -33,23 +33,46 @@ onMounted(() => {
 const loadFile = async (e) => {
   const img = new Image();
   img.onload = function () {
-    const canvas = new fabric.Canvas("myCanvas");
+    canvas = new fabric.Canvas("myCanvas");
     //image
     fabric.Image.fromURL(img.src, function (oImg) {
       oImg.scale(1);
       canvas.add(oImg);
+      oImg.hasBorders = false;//枠線をなくす
+      oImg.hasControls = false;//枠線の□をなくす
     });
   };
   img.src = URL.createObjectURL(e.target.files[0]);
 };
 //canvasイメージをダウンロード
 const getImage = () => {
-  const canvas = document.querySelector("#myCanvas");
+  const imageCanvas = document.querySelector("#myCanvas");
   const link = document.createElement('a');
-  link.href = canvas.toDataURL();
+  link.href = imageCanvas.toDataURL();
   link.download = 'export_image.png';
   link.click();
-}
+};
+// 特定要素の削除
+const elmDelete = () => {
+  //選択されているオブジェクトを削除する。
+  let activeObjects = canvas.getActiveObjects();
+
+  if (activeObjects != null) {
+    if (confirm('選択された箇所を全て削除しますか？')) {
+      activeObjects.forEach(obj => {
+
+        //対象オブジェクトを削除
+        canvas.remove(obj);
+
+        //矩形のIDとcanvas.item紐づけ用配列も削除する。
+        let arrIndex = arrayRect.indexOf(obj.id);
+        arrayRect.splice(arrIndex, 1);
+      });
+    }
+  } else {
+    alert("オブジェクトが選択されていません。");
+  }
+};
 </script>
 <template>
   <div class="m-2">
@@ -63,7 +86,8 @@ const getImage = () => {
         <input type="file" id="loadFile" v-on:change="loadFile" required minlength="4" maxlength="8" size="10">
       </div>
       <div class="flex justify-center">
-        <button type="button" v-on:click="getImage" class="p-2 border-2">ダウンロード</button>
+        <button type="button" v-on:click="getImage" class="p-2 border-2">Capture</button>
+        <button type="button" v-on:click="elmDelete" class="p-2 border-2">Delete</button>
       </div>
     </div>
   </div>
