@@ -1,9 +1,21 @@
 <script setup>
 //https://blog.mahoroi.com/posts/2020/05/browser-head-pose-estimation/
 import * as faceapi from 'face-api.js';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 var video;
 var canvas;
+
+const landmarks = ref();
+const nose = ref();
+const leftEye = ref();
+const rightEye = ref();
+const jaw = ref();
+const leftMouth = ref();
+const rightMouth = ref();
+const leftOutline = ref();
+const rightOutline = ref();
+
+
 const webCameraOn = () => {
     navigator.mediaDevices.getUserMedia({
         video: true,
@@ -45,15 +57,15 @@ async function detect() {
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetection);
     // 以後使用するランドマーク座標
-    const landmarks = resizedDetection.landmarks;
-    const nose = landmarks.getNose()[3];
-    const leftEye = landmarks.getLeftEye()[0];
-    const rightEye = landmarks.getRightEye()[3];
-    const jaw = landmarks.getJawOutline()[8];
-    const leftMouth = landmarks.getMouth()[0];
-    const rightMouth = landmarks.getMouth()[6];
-    const leftOutline = landmarks.getJawOutline()[0];
-    const rightOutline = landmarks.getJawOutline()[16];
+    landmarks.value = resizedDetection.landmarks;
+    nose.value = landmarks.value.getNose()[3];
+    leftEye.value = landmarks.value.getLeftEye()[0];
+    rightEye.value = landmarks.value.getRightEye()[3];
+    jaw.value = landmarks.value.getJawOutline()[8];
+    leftMouth.value = landmarks.value.getMouth()[0];
+    rightMouth.value = landmarks.value.getMouth()[6];
+    leftOutline.value = landmarks.value.getJawOutline()[0];
+    rightOutline.value = landmarks.value.getJawOutline()[16];
 }
 onMounted(() => {
     video = document.getElementById("video")
@@ -66,13 +78,25 @@ onMounted(() => {
 </script>
 <template>
     <div>
-        <h1>WEBカメラの映像を表示</h1>
-        <div style="position: relative;">
-            <video id="video" width="640" height="480" style="transform: scaleX(-1);"></video>
-            <canvas id="canvas1" width="640" height="480"
-                style="position: absolute; top: 0px; left: 0px; transform: scaleX(-1);"></canvas>
-            <canvas id="canvas2" width="640" height="480"
-                style="position: absolute; top: 0px; left: 0px; transform: scaleX(-1);"></canvas>
+        <h1 class="text-center">顔認識</h1>
+        <div style="position: relative;" class="grid grid-cols-2 my-4">
+            <div>
+                <video id="video" width="640" height="480" style="transform: scaleX(-1);"></video>
+                <canvas id="canvas1" width="640" height="480"
+                    style="position: absolute; top: 0px; left: 0px; transform: scaleX(-1);"></canvas>
+                <canvas id="canvas2" width="640" height="480"
+                    style="position: absolute; top: 0px; left: 0px; transform: scaleX(-1);"></canvas>
+            </div>
+            <div class="p-4 border">
+                <p>nose:{{ nose }}</p>
+                <p>leftEye:{{ leftEye }}</p>
+                <p>rightEye:{{ rightEye }}</p>
+                <p>jaw:{{ jaw }}</p>
+                <p>leftMouth:{{ leftMouth }}</p>
+                <p>rightMouth:{{ rightMouth }}</p>
+                <p>leftOutline:{{ leftOutline }}</p>
+                <p>rightOutline:{{ rightOutline }}</p>
+            </div>
         </div>
     </div>
 </template>
