@@ -3,6 +3,7 @@
 //https://qiita.com/kurukuruz/items/966f0c6942df73f35f46
 //https://erabikata.info/javascript-canvas-fabric-image.html
 //https://zenn.dev/megeton/articles/aaad434c8533b6
+//https://qiita.com/bstyle6130/items/22b2336893773f775cab
 import { fabric } from "fabric";
 import { onMounted } from "vue";
 
@@ -102,17 +103,23 @@ const postText = () => {
     <h1 class="flex-none text-center">Fabric JS</h1>
     <div class="grid grid-cols-2">
       <div class="flex justify-center w-full m-2">
-        <canvas id="myCanvas" width=512 height=512 class="block border-2 bg-gray400"></canvas>
+        <canvas id="myCanvas" width="512" height="512" class="block border-2 bg-gray400"></canvas>
       </div>
-      <div>
-        <div class="flex justify-center">
-          <label for="loadFile" class="">Uploading Image</label>
+      <div class="grid grid-cols-1">
+        <div class="border">
+          <label for="loadFile" class="">Uploading Image</label><br />
           <input type="file" id="loadFile" v-on:change="loadFile" required minlength="4" maxlength="8" size="10">
         </div>
-        <div class="flex justify-center">
-          <button type="button" v-on:click="getImage" class="p-2 border-2">Capture</button>
+        <div class="border">
           <button type="button" v-on:click="elmDelete" class="p-2 border-2">Delete</button>
+        </div>
+        <div class="border">
+          <p>Add Object</p>
           <button type="button" v-on:click="postText" class="p-2 border-2">DrawText</button>
+        </div>
+        <div class="border">
+          <p>Download</p>
+          <button type="button" v-on:click="getImage" class="p-2 border-2">Download</button>
         </div>
       </div>
     </div>
