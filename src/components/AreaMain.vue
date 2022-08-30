@@ -1,9 +1,9 @@
 <script setup>
-import FaceapiJs from "./parts/FaceapiJs.vue";
+import FabricBase from "./parts/Fabric/FabricBase.vue";
 </script>
 <template>
   <div>
-    <FaceapiJs />
+    <FabricBase />
   </div>
 </template>
 <style scoped>
