@@ -19,7 +19,7 @@ const rect = new fabric.Rect({
 
 onMounted(() => {
   canvas = document.getElementById("myCanvas");
-  canvasFab = new fabric.Canvas("myCanvas");
+  canvasFab = new fabric.Canvas("myCanvas", { preserveObjectStacking: true });
 });
 //ファイルのロード
 const loadFile = async (e) => {
