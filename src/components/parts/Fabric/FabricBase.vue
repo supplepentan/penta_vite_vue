@@ -31,7 +31,15 @@ const loadFile = async (e) => {
     //☆画像描画
     fabric.Image.fromURL(img.src, function (oImg) {
       //☆画像をcanvasサイズに合わせる
-      oImg.scaleToWidth(canvasFab.width)
+      if (img.width > img.height) {
+        oImg.scaleToWidth(canvasFab.width)
+      } else {
+        oImg.scaleToHeight(canvasFab.height)
+      };
+      oImg.left = (canvasFab.width / 2);
+      oImg.top = (canvasFab.height / 2);
+      oImg.originX = "center";
+      oImg.originY = "center";
       //☆画像描画の倍率
       //oImg.scale(1);
       canvasFab.add(oImg)
