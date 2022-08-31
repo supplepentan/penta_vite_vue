@@ -9,6 +9,8 @@ import { onMounted } from "vue";
 
 var canvas;
 var canvasFab;
+var canvasImage;
+var ctxImage;
 // create a rectangle object
 const rect = new fabric.Rect({
   left: 200,
@@ -19,8 +21,12 @@ const rect = new fabric.Rect({
 });
 
 onMounted(() => {
-  canvas = document.getElementById("myCanvas");
-  canvasFab = new fabric.Canvas("myCanvas", { preserveObjectStacking: true });
+  canvas = document.getElementById("canvasFab");
+  console.log(canvas.width);
+  canvasFab = new fabric.Canvas("canvasFab", { preserveObjectStacking: true });
+  console.log(canvas.width);
+  canvasImage = document.getElementById("canvasImage");
+  ctxImage = canvasImage.getContext('2d');
 });
 //ファイルのロード
 const loadFile = async (e) => {
@@ -57,11 +63,12 @@ const getImage = () => {
   //fabricのアクティブを解除
   canvasFab.discardActiveObject();
   canvasFab.renderAll();
-  const imageCanvas = document.getElementById("myCanvas");
+  ctxImage.drawImage(canvas, 0, 0, 512, 512);
   const link = document.createElement('a');
-  link.href = imageCanvas.toDataURL();
+  link.href = canvasImage.toDataURL();
   link.download = 'export_image.png';
   link.click();
+  ctxImage.clearRect(0, 0, canvasImage.width, canvasImage.height);
 };
 // 特定要素の削除
 const elmDelete = () => {
@@ -103,7 +110,8 @@ const postText = () => {
     <h1 class="flex-none text-center">Fabric JS</h1>
     <div class="grid grid-cols-2">
       <div class="flex justify-center w-full m-2">
-        <canvas id="myCanvas" width="512" height="512" class="block border-2 bg-gray400"></canvas>
+        <canvas id="canvasFab" width="512" height="512" class="block border-2 bg-gray400"></canvas>
+        <canvas id="canvasImage" width="512" height="512" class="invisible"></canvas>
       </div>
       <div class="grid grid-cols-1">
         <div class="border">
