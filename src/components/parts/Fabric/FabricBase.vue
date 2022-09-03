@@ -5,12 +5,13 @@
 //https://zenn.dev/megeton/articles/aaad434c8533b6
 //https://qiita.com/bstyle6130/items/22b2336893773f775cab
 import { fabric } from "fabric";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 var canvas;
 var canvasFab;
 var canvasImage;
 var ctxImage;
+const downloadImageType = ref();
 // create a rectangle object
 const rect = new fabric.Rect({
   left: 200,
@@ -65,9 +66,15 @@ const getImage = () => {
   canvasFab.renderAll();
   ctxImage.drawImage(canvas, 0, 0, 512, 512);
   const link = document.createElement('a');
-  link.href = canvasImage.toDataURL();
-  link.download = 'export_image.png';
-  link.click();
+  if (downloadImageType.value == "Jpeg") {
+    link.href = canvasImage.toDataURL("image/jpeg");
+    link.download = 'export_image.jpg';
+    link.click();
+  } else {
+    link.href = canvasImage.toDataURL("image/png");
+    link.download = 'export_image.png';
+    link.click();
+  }
   ctxImage.clearRect(0, 0, canvasImage.width, canvasImage.height);
 };
 // 特定要素の削除
@@ -127,9 +134,21 @@ const postText = () => {
         </div>
         <div class="border">
           <p>Download</p>
-          <button type="button" v-on:click="getImage" class="p-2 border-2">Download</button>
+          <div>
+            <input type="radio" id="imageJpeg" value="Jpeg" v-model="downloadImageType">
+            <label for="one">Jpeg</label>
+            <br>
+            <input type="radio" id="imagePing" value="Ping" v-model="downloadImageType">
+            <label for="two">Ping</label>
+            <br>
+          </div>
+          <div>
+            <button type="button" v-on:click="getImage" class="p-2 border-2">Download</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+<style scoped>
+</style>
