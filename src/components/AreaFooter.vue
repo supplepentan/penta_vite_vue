@@ -6,8 +6,9 @@ const count = ref(0)
 </script>
 
 <template>
-    <Footer_tailwind />
+  <Footer_tailwind />
 </template>
 
 <style scoped>
+
 </style>
